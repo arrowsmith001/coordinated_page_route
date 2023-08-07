@@ -1,39 +1,67 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+# Coordinated Page Route
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages).
+A dart package for Flutter that allows co-ordinated page transitions that animate the previous route as well as the incoming route.
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages).
--->
-
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
 
 ## Features
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+Allows fully customizable animation of the outgoing route page that is synchronized with the incoming route animation.
+
+This package also includes some examples that will hopefully cover some common use cases:
+
+* [**`SlidingPushRoute`**](https://github.com/arrowsmith001/coordinated_page_route/blob/755b21299df0b162886018a35ad12078ea163678/lib/src/routes/abstract/sliding_push_route.dart): Abstract class representing the case where an incoming route will "push" out the previous route as it slides in. An initial offset must be specified in subclasses which determines the entry page's initial offset from the center. The exit page will animate to the negative of this offset. This effect works particularly well when at least one of dx or dy has a magnitude of 1 to ensure the pages are in constant contact.
+
+  The following implement `SlidingPushRoute` in a particular direction:
+
+    * [**`ForwardPushRoute`**](https://github.com/arrowsmith001/coordinated_page_route/blob/755b21299df0b162886018a35ad12078ea163678/lib/src/routes/sliding_push_routes/forward_push_route.dart)
+    * [**`BackwardPushRoute`**](https://github.com/arrowsmith001/coordinated_page_route/blob/755b21299df0b162886018a35ad12078ea163678/lib/src/routes/sliding_push_routes/backward_push_route.dart)
+    * [**`UpwardPushRoute`**](https://github.com/arrowsmith001/coordinated_page_route/blob/755b21299df0b162886018a35ad12078ea163678/lib/src/routes/sliding_push_routes/upward_push_route.dart)
+    * [**`DownwardPushRoute`**](https://github.com/arrowsmith001/coordinated_page_route/blob/755b21299df0b162886018a35ad12078ea163678/lib/src/routes/sliding_push_routes/downward_push_route.dart)
+
+* [**`CoordinatedZoomFadeRoute`**](https://github.com/arrowsmith001/coordinated_page_route/blob/755b21299df0b162886018a35ad12078ea163678/lib/src/routes/coordinated_zoom_fade_route/coordinated_zoom_fade_route.dart): An example of a more visually interesting fully custom transition that is now possible. The outgoing route expands and fades out while the incoming route expands from a small size and fades in. Because this transition is see-through this should be implemented using transparent pages with the Navigator on an opaque background. 
+
 
 ## Getting started
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+See [example](https://github.com/arrowsmith001/coordinated_page_route/tree/755b21299df0b162886018a35ad12078ea163678/example/lib).
+
 
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
+You must include a `CoordinatedRouteObserver` in the `NavigatorObserver` list for any Navigator that you wish to take advantage of the coordinated animation.
 
-```dart
-const like = 'sample';
+For a `MaterialApp`, that looks like this:
+
+```
+MaterialApp(
+      navigatorObservers: 
+      [
+        CoordinatedRouteObserver() // <--- This must go here!
+      ]
+    )
 ```
 
-## Additional information
+For a standalone `Navigator`:
+```
+Navigator(
+      observers: 
+      [
+        CoordinatedRouteObserver() // <--- This must go here!
+      ]
+    )
+```
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+Then simply push your route like normal:
+```
+Navigator.of(context).push(ForwardPushRoute((context) => MyPage())),
+```
+
+To make your own animated transitions, simply extend the `CoordinatedPageRoute` base class and implement the following:
+
+* **entryTransitionBuilder**: a function that takes a `BuildContext` and child `Widget` and returns the transformed widget. This is simply passed to the `transitionsBuilder` of the `PageRouteBuilder` superclass which you're probably familiar with.
+* **exitTransitionBuilder**: similar to the `entryTransitionBuilder`, however, in practice the `BuildContext` will be the `BuildContext` of the `Navigator` and the child `Widget` will be captured from the previous route (or more specifically the widget built by the overlay entry containing the page built using the previous route's builder).
+
+Because both builders have access to the same `animation` passed down from the `PageRouteBuilder` of the incoming route, the animations are synchronized.
+
+
+## Additional information
