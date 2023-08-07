@@ -1,6 +1,6 @@
 name: coordinated_page_route
 description: A dart package for Flutter that allows co-ordinated page transitions that animate the previous route as well as the incoming route.
-version: 0.0.1
+version: 0.0.3
 homepage: https://github.com/arrowsmith001/coordinated_page_route
 
 environment:

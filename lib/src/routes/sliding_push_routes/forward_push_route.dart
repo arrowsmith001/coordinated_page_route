@@ -1,7 +1,7 @@
 
 import 'package:flutter/animation.dart';
 
-import '../abstract/sliding_push_route.dart';
+import '../../abstract/sliding_push_route.dart';
 
 class ForwardPushRoute extends SlidingPushRoute {
   ForwardPushRoute(super.child);

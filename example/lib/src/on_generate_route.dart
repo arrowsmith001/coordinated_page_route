@@ -16,7 +16,7 @@ Route? onGenerateRoute(RouteSettings settings) {
     case 'down':
       return DownwardPushRoute((context) => const MyPage('Down', Colors.green));
     case 'forward':
-      return ForwardPushRoute(
+      return ForwardPushFadeInRoute(
           (context) => const MyPage('Forward', Colors.blue));
     case 'zoomfade':
       return CoordinatedZoomFadeRoute(
