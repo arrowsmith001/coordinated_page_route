@@ -1,12 +1,10 @@
 import 'package:coordinated_page_route/coordinated_page_route.dart';
-import 'package:coordinated_page_route/src/abstract/multi_transition_coordinated_route.dart';
-import 'package:coordinated_page_route/src/transitions/coordinated_transition_builders.dart';
 import 'package:flutter/widgets.dart';
 
 /// A [CoordinatedPageRoute] whose previous route expands while fading out as the new route expands and fades in.
 ///
 /// This should ideally be implemented with transparent pages who share a common background, since the transition is see-through.
-class CoordinatedZoomFadeRoute extends MultiTransitionCoordinatedRoute {
+class CoordinatedZoomFadeRoute extends CoordinatedPageRoute {
   CoordinatedZoomFadeRoute(super.builder,
       {Duration transitionDuration = const Duration(seconds: 1),
       this.entryScaleFrom = 0.25,
@@ -23,20 +21,45 @@ class CoordinatedZoomFadeRoute extends MultiTransitionCoordinatedRoute {
 
   final Curve curve;
 
-  late Interval entryInterval = Interval(entryIntervalFrom, 1.0, curve: curve);
-  late Interval exitInterval = Interval(0.0, exitIntervalTo, curve: curve);
+  @override
+  Widget getEntryTransition(
+      BuildContext context, Animation<double> animation, Widget child) {
+
+    final fadeAnimation = CurvedAnimation(
+        parent: animation,
+        curve: Interval(entryIntervalFrom, 1.0, curve: curve));
+
+    final scaleAnimation = CurvedAnimation(
+        parent: animation, curve: curve).drive(Tween(begin: entryScaleFrom, end: 1.0));
+
+    return FadeTransition(
+      opacity: fadeAnimation,
+      child: ScaleTransition(
+        scale: scaleAnimation,
+        child: child,
+      ),
+    );
+  }
 
   @override
-  List<CoordinatedTransitionBuilder> get entryBuilders => 
-  [
-        CoordinatedTransitionBuilders.scaleTransitionBuilder(entryScaleFrom, 1.0, interval: entryInterval),
-        CoordinatedTransitionBuilders.fadeTransitionBuilder(0.0, 1.0, interval: entryInterval),
-  ];
+  Widget getExitTransition(
+      BuildContext context, Animation<double> animation, Widget child) {
 
-  @override
-  List<CoordinatedTransitionBuilder> get exitBuilders => 
-  [
-    CoordinatedTransitionBuilders.scaleTransitionBuilder(1.0, exitScaleTo, interval: exitInterval),
-    CoordinatedTransitionBuilders.fadeTransitionBuilder(1.0, 0.0, interval: exitInterval),
-  ];
+        final fadeAnimation = CurvedAnimation(
+        parent: animation,
+        curve: Interval(0.0, exitIntervalTo, curve: curve))
+        .drive(Tween(begin: 1.0, end: 0.0));
+
+    final scaleAnimation = CurvedAnimation(
+        parent: animation, curve: Interval(0.0, exitIntervalTo, curve: curve))
+        .drive(Tween(begin: 1.0, end: exitScaleTo));
+
+    return FadeTransition(
+      opacity: fadeAnimation,
+      child: ScaleTransition(
+        scale: scaleAnimation,
+        child: child,
+      ),
+    );
+  }
 }

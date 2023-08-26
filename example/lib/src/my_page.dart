@@ -8,20 +8,25 @@ class MyPage extends StatelessWidget {
   final Color backgroundColor;
   final List<String> routeNames = const [
     'home',
-    'up',
-    'back',
     'forward',
+    'back',
+    'up',
     'down',
+    'forward (fade)',
+    'back (fade)',
     'zoomfade',
-    'material'
+    'material',
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.transparent,
         body: Container(
       decoration: BoxDecoration(
-          gradient: RadialGradient(colors: [Colors.white, backgroundColor])),
+          //color: Colors.transparent),
+          gradient: RadialGradient(colors: [Colors.white, backgroundColor])
+          ),
       child: Center(
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           Text(title),

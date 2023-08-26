@@ -1,6 +1,5 @@
 import 'package:coordinated_page_route/coordinated_page_route.dart';
-import 'package:flutter/src/animation/animation.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter/widgets.dart';
 
 /// Use this to declare your builder functions directly in the constructor
 class CoordinatedPageRouteImpl extends CoordinatedPageRoute {

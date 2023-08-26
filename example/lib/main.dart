@@ -1,3 +1,4 @@
+
 import 'package:coordinated_page_route/coordinated_page_route.dart';
 import 'package:example/src/on_generate_route.dart';
 import 'package:flutter/material.dart';
@@ -11,29 +12,27 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialAppExample(); 
-    //return const NavigatorExample(); 
+    return const MaterialApp(home: const MaterialAppExample());
   }
 }
-
 
 class MaterialAppExample extends StatelessWidget {
   const MaterialAppExample({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      navigatorObservers: 
-      [
-        CoordinatedRouteObserver() // <--- This must go here!
-      ], 
-      initialRoute: 'home',
-      onGenerateRoute: onGenerateRoute,
+    return Container(
+      color: Colors.black,
+      child: MaterialApp(
+        navigatorObservers: [
+          CoordinatedRouteObserver() // <--- This must go here!
+        ],
+        initialRoute: 'home',
+        onGenerateRoute: onGenerateRoute,
+      ),
     );
   }
 }
-
-
 
 class NavigatorExample extends StatelessWidget {
   const NavigatorExample({super.key});
@@ -41,14 +40,12 @@ class NavigatorExample extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Navigator(
-        observers: 
-        [
-          CoordinatedRouteObserver() // <--- This must go here!
-        ],
-        initialRoute: 'home',
-        onGenerateRoute: onGenerateRoute,
-      ));
+        home: Navigator(
+      observers: [
+        CoordinatedRouteObserver() // <--- This must go here!
+      ],
+      initialRoute: 'home',
+      onGenerateRoute: onGenerateRoute,
+    ));
   }
 }
-
