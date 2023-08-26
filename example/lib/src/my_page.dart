@@ -8,13 +8,14 @@ class MyPage extends StatelessWidget {
   final Color backgroundColor;
   final List<String> routeNames = const [
     'home',
-    'up',
-    'back',
     'forward',
+    'back',
+    'up',
     'down',
+    'forward (fade)',
+    'back (fade)',
     'zoomfade',
     'material',
-    'complex',
   ];
 
   @override
