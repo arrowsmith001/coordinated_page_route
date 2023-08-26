@@ -13,15 +13,19 @@ class MyPage extends StatelessWidget {
     'forward',
     'down',
     'zoomfade',
-    'material'
+    'material',
+    'complex',
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.transparent,
         body: Container(
       decoration: BoxDecoration(
-          gradient: RadialGradient(colors: [Colors.white, backgroundColor])),
+          //color: Colors.transparent),
+          gradient: RadialGradient(colors: [Colors.white, backgroundColor])
+          ),
       child: Center(
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           Text(title),

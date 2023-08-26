@@ -12,12 +12,12 @@ abstract class SlidingPushRoute extends CoordinatedPageRoute {
 
   @override
   Widget getEntryTransition(BuildContext context, Animation<double> animation, Widget child) {
-    return CoordinatedTransitionBuilders.slideTransitionBuilder(initialOffset, Offset.zero, curve: curve)(animation, child);
+    return TransitionCatalogue.slideTransitionBuilder(initialOffset, Offset.zero, curve: curve)(animation, child);
   }
 
   @override
   Widget getExitTransition(BuildContext context, Animation<double> animation, Widget child) {
-    return CoordinatedTransitionBuilders.slideTransitionBuilder(Offset.zero, -initialOffset, curve: curve)(animation, child);
+    return TransitionCatalogue.slideTransitionBuilder(Offset.zero, -initialOffset, curve: curve)(animation, child);
   }
 
   /// The offset at which the newRoute begins its entry.

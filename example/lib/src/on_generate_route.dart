@@ -1,9 +1,11 @@
+import 'dart:math';
+
 import 'package:coordinated_page_route/coordinated_page_route.dart';
+import 'package:example/src/complex_multi_transition_route_demo.dart';
 import 'package:example/src/my_page.dart';
 import 'package:flutter/material.dart';
 
 Route? onGenerateRoute(RouteSettings settings) {
-  
   switch (settings.name) {
     case 'home':
       return PageRouteBuilder(pageBuilder: (context, _, __) {
@@ -16,11 +18,13 @@ Route? onGenerateRoute(RouteSettings settings) {
     case 'down':
       return DownwardPushRoute((context) => const MyPage('Down', Colors.green));
     case 'forward':
-      return ForwardPushFadeInRoute(
-          (context) => const MyPage('Forward', Colors.blue));
+      return ForwardPushRoute((context) => const MyPage('Forward', Colors.blue));
     case 'zoomfade':
       return CoordinatedZoomFadeRoute(
           (context) => const MyPage('Zoom Fade', Colors.orange));
+    case 'complex':
+      return ComplexMultiTransitionRouteDemo(
+          (context) => const MyPage('Complex', Colors.purple));
     case 'material':
       return MaterialPageRoute(
           builder: (context) => const MyPage('Material', Colors.pink));
@@ -28,3 +32,4 @@ Route? onGenerateRoute(RouteSettings settings) {
 
   return null;
 }
+

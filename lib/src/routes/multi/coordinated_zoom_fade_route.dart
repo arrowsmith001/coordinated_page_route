@@ -23,20 +23,17 @@ class CoordinatedZoomFadeRoute extends MultiTransitionCoordinatedRoute {
 
   final Curve curve;
 
-  late Interval entryInterval = Interval(entryIntervalFrom, 1.0, curve: curve);
-  late Interval exitInterval = Interval(0.0, exitIntervalTo, curve: curve);
+  @override
+  MultiTransitionBuilder entryBuilder(MultiTransitionBuilder builder) => builder
+      .at(entryIntervalFrom)
+      .addFade(0, 1)
+      .addScale(entryScaleFrom, 1)
+      .curveAll(curve);
 
   @override
-  List<CoordinatedTransitionBuilder> get entryBuilders => 
-  [
-        CoordinatedTransitionBuilders.scaleTransitionBuilder(entryScaleFrom, 1.0, interval: entryInterval),
-        CoordinatedTransitionBuilders.fadeTransitionBuilder(0.0, 1.0, interval: entryInterval),
-  ];
-
-  @override
-  List<CoordinatedTransitionBuilder> get exitBuilders => 
-  [
-    CoordinatedTransitionBuilders.scaleTransitionBuilder(1.0, exitScaleTo, interval: exitInterval),
-    CoordinatedTransitionBuilders.fadeTransitionBuilder(1.0, 0.0, interval: exitInterval),
-  ];
+  MultiTransitionBuilder exitBuilder(MultiTransitionBuilder builder) => builder
+      .addFade(1, 0)
+      .addScale(1, exitScaleTo)
+      .curveAll(curve)
+      .until(exitIntervalTo);
 }
