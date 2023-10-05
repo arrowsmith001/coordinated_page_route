@@ -2,6 +2,7 @@
 
 A dart package for Flutter that allows co-ordinated page transitions that animate the previous route as well as the incoming route.
 
+https://github.com/arrowsmith001/coordinated_page_route/assets/68137859/3a761ef6-ced1-45a0-a4b1-638975061707
 
 ## Features
 
