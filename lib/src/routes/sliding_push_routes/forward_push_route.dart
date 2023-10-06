@@ -1,8 +1,8 @@
-
 import 'package:flutter/animation.dart';
 
 import '../../abstract/sliding_push_route.dart';
 
+/// A [SlidingPushRoute] that appears to transition forwards.
 class ForwardPushRoute extends SlidingPushRoute {
   ForwardPushRoute(super.child);
 

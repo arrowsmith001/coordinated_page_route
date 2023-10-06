@@ -1,7 +1,7 @@
-
 import 'package:coordinated_page_route/coordinated_page_route.dart';
 import 'package:flutter/animation.dart';
 
+/// A [SlidingFadePushRoute] that appears to transition upwards.
 class UpwardFadePushRoute extends SlidingFadePushRoute {
   UpwardFadePushRoute(super.child);
 

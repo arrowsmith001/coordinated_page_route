@@ -12,9 +12,10 @@ abstract class SlidingPushRoute extends CoordinatedPageRoute {
   Widget getEntryTransition(
       BuildContext context, Animation<double> animation, Widget child) {
     return SlideTransition(
-        position: CurvedAnimation(parent: animation, curve: curve)
-            .drive(Tween(begin: initialOffset, end: Offset.zero)),
-            child: child,);
+      position: CurvedAnimation(parent: animation, curve: curve)
+          .drive(Tween(begin: initialOffset, end: Offset.zero)),
+      child: child,
+    );
   }
 
   @override
@@ -23,7 +24,7 @@ abstract class SlidingPushRoute extends CoordinatedPageRoute {
     return SlideTransition(
         position: CurvedAnimation(parent: animation, curve: curve)
             .drive(Tween(begin: Offset.zero, end: -initialOffset)),
-            child: child);
+        child: child);
   }
 
   /// The offset at which the newRoute begins its entry.

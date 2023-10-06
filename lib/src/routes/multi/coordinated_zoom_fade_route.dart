@@ -24,13 +24,12 @@ class CoordinatedZoomFadeRoute extends CoordinatedPageRoute {
   @override
   Widget getEntryTransition(
       BuildContext context, Animation<double> animation, Widget child) {
-
     final fadeAnimation = CurvedAnimation(
         parent: animation,
         curve: Interval(entryIntervalFrom, 1.0, curve: curve));
 
-    final scaleAnimation = CurvedAnimation(
-        parent: animation, curve: curve).drive(Tween(begin: entryScaleFrom, end: 1.0));
+    final scaleAnimation = CurvedAnimation(parent: animation, curve: curve)
+        .drive(Tween(begin: entryScaleFrom, end: 1.0));
 
     return FadeTransition(
       opacity: fadeAnimation,
@@ -44,14 +43,14 @@ class CoordinatedZoomFadeRoute extends CoordinatedPageRoute {
   @override
   Widget getExitTransition(
       BuildContext context, Animation<double> animation, Widget child) {
-
-        final fadeAnimation = CurvedAnimation(
-        parent: animation,
-        curve: Interval(0.0, exitIntervalTo, curve: curve))
+    final fadeAnimation = CurvedAnimation(
+            parent: animation,
+            curve: Interval(0.0, exitIntervalTo, curve: curve))
         .drive(Tween(begin: 1.0, end: 0.0));
 
     final scaleAnimation = CurvedAnimation(
-        parent: animation, curve: Interval(0.0, exitIntervalTo, curve: curve))
+            parent: animation,
+            curve: Interval(0.0, exitIntervalTo, curve: curve))
         .drive(Tween(begin: 1.0, end: exitScaleTo));
 
     return FadeTransition(

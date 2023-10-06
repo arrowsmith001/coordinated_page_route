@@ -2,6 +2,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
 import 'coordinated_page_route.dart';
 
+/// A [NavigatorObserver] that manages the exit transition of a [CoordinatedPageRoute].
 class CoordinatedRouteObserver extends NavigatorObserver {
   @override
   void didPush(Route route, Route? previousRoute) {
@@ -25,7 +26,6 @@ class CoordinatedRouteObserver extends NavigatorObserver {
     }
 
     if (newRoute is CoordinatedPageRoute) {
-
       /// Get the overlay entry which corresponds to the page presented by the Navigator.
       ///
       /// Typically the Navigator installs, by default, two overlay entries with the corresponding child widgets:
@@ -44,7 +44,6 @@ class CoordinatedRouteObserver extends NavigatorObserver {
       final Widget animatedOldRouteScreen =
           newRoute.exitTransitionBuilder(navigatorState.context, prevRoutePage);
 
-
       /// This was the annoying part to figure out.
       ///
       /// The convenient builder that built our page above produces a widget with the same GlobalKey as the original page.
@@ -52,15 +51,14 @@ class CoordinatedRouteObserver extends NavigatorObserver {
       /// However, forcibly removing it from the overlayEntries list led to glitchy behaviour on Navigator.pop().
       ///
       /// In the end, removing and inserting the proper way AND forcibly updating the list was what got it to work.
-      /// 
-      /// The post-frame callback fixes a brief flicker where neither overlay entry seems to be visible. 
+      ///
+      /// The post-frame callback fixes a brief flicker where neither overlay entry seems to be visible.
 
       final List<OverlayEntry> overlayEntries = prevRoute.overlayEntries;
       final OverlayEntry newOverlayEntry =
           OverlayEntry(builder: (context) => animatedOldRouteScreen);
 
       SchedulerBinding.instance.addPostFrameCallback((_) {
-
         prevRouteOverlayEntry
           ..remove()
           ..dispose();

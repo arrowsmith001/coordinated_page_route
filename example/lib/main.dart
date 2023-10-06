@@ -1,4 +1,3 @@
-
 import 'package:coordinated_page_route/coordinated_page_route.dart';
 import 'package:example/src/on_generate_route.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +11,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(home: const MaterialAppExample());
+    return const MaterialApp(home: MaterialAppExample());
   }
 }
 

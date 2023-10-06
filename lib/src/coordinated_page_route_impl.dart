@@ -3,8 +3,8 @@ import 'package:flutter/widgets.dart';
 
 /// Use this to declare your builder functions directly in the constructor
 class CoordinatedPageRouteImpl extends CoordinatedPageRoute {
-  
-  CoordinatedPageRouteImpl(super.builder, {required this.entryBuilder, required this.exitBuilder});
+  CoordinatedPageRouteImpl(super.builder,
+      {required this.entryBuilder, required this.exitBuilder});
 
   final Widget Function(
     BuildContext context,
@@ -16,7 +16,6 @@ class CoordinatedPageRouteImpl extends CoordinatedPageRoute {
     Animation<double> animation,
     Widget child,
   ) exitBuilder;
-
 
   @override
   Widget getEntryTransition(

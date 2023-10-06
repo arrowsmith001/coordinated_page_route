@@ -20,9 +20,7 @@ This package also includes some examples that will hopefully cover some common u
     * [**`DownwardPushRoute`**](https://github.com/arrowsmith001/coordinated_page_route/blob/755b21299df0b162886018a35ad12078ea163678/lib/src/routes/sliding_push_routes/downward_push_route.dart)
 
 
-* 'MultiTransitionCoordinatedRoute': Abstract class that tries to simplify the process of adding numerous transitions (i.e. sliding, fading, zooming...) altogether. Work in progress, subject to change.
-
-    * [**`CoordinatedZoomFadeRoute`**](https://github.com/arrowsmith001/coordinated_page_route/blob/755b21299df0b162886018a35ad12078ea163678/lib/src/routes/coordinated_zoom_fade_route/coordinated_zoom_fade_route.dart): An example of a more visually interesting fully custom transition that is now possible. The outgoing route expands and fades out while the incoming route expands from a small size and fades in. Because this transition is see-through this should be implemented using transparent pages with the Navigator on an opaque background. 
+* [**`CoordinatedZoomFadeRoute`**](https://github.com/arrowsmith001/coordinated_page_route/blob/755b21299df0b162886018a35ad12078ea163678/lib/src/routes/coordinated_zoom_fade_route/coordinated_zoom_fade_route.dart): An example of a more visually interesting fully custom transition that is now possible. The outgoing route expands and fades out while the incoming route expands from a small size and fades in. Because this transition is see-through this should be implemented using transparent pages with the Navigator on an opaque background. 
 
 
 ## Getting started
