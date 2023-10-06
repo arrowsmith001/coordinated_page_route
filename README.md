@@ -10,17 +10,21 @@ Allows fully customizable animation of the outgoing route page that is synchroni
 
 This package also includes some examples that will hopefully cover some common use cases:
 
-* [**`SlidingPushRoute`**](https://github.com/arrowsmith001/coordinated_page_route/blob/755b21299df0b162886018a35ad12078ea163678/lib/src/routes/abstract/sliding_push_route.dart): Abstract class representing the case where an incoming route will "push" out the previous route as it slides in. An initial offset must be specified in subclasses which determines the entry page's initial offset from the center. The exit page will animate to the negative of this offset. This effect works particularly well when at least one of dx or dy has a magnitude of 1 to ensure the pages are in constant contact.
+* [<h3>**`SlidingPushRoute`**</h3>](https://github.com/arrowsmith001/coordinated_page_route/blob/755b21299df0b162886018a35ad12078ea163678/lib/src/routes/abstract/sliding_push_route.dart)
 
-  The following implement `SlidingPushRoute` in a particular direction:
+  Abstract class representing the case where an incoming route will "push" out the previous route as it slides in. An initial offset must be specified in subclasses which determines the entry page's initial offset from the center. The exit page will animate to the negative of this offset. This effect works particularly well when at least one of dx or dy has a magnitude of 1 to ensure the pages are in constant contact.
 
-    * [**`ForwardPushRoute`**](https://github.com/arrowsmith001/coordinated_page_route/blob/755b21299df0b162886018a35ad12078ea163678/lib/src/routes/sliding_push_routes/forward_push_route.dart)
-    * [**`BackwardPushRoute`**](https://github.com/arrowsmith001/coordinated_page_route/blob/755b21299df0b162886018a35ad12078ea163678/lib/src/routes/sliding_push_routes/backward_push_route.dart)
-    * [**`UpwardPushRoute`**](https://github.com/arrowsmith001/coordinated_page_route/blob/755b21299df0b162886018a35ad12078ea163678/lib/src/routes/sliding_push_routes/upward_push_route.dart)
-    * [**`DownwardPushRoute`**](https://github.com/arrowsmith001/coordinated_page_route/blob/755b21299df0b162886018a35ad12078ea163678/lib/src/routes/sliding_push_routes/downward_push_route.dart)
+  The package comes with 4 implementations right out of the box for the 4 main directions: [`ForwardPushRoute`](https://github.com/arrowsmith001/coordinated_page_route/blob/755b21299df0b162886018a35ad12078ea163678/lib/src/routes/sliding_push_routes/forward_push_route.dart), [`BackwardPushRoute`](https://github.com/arrowsmith001/coordinated_page_route/blob/755b21299df0b162886018a35ad12078ea163678/lib/src/routes/sliding_push_routes/backward_push_route.dart), [`UpwardPushRoute`](https://github.com/arrowsmith001/coordinated_page_route/blob/755b21299df0b162886018a35ad12078ea163678/lib/src/routes/sliding_push_routes/upward_push_route.dart) and [`DownwardPushRoute`](https://github.com/arrowsmith001/coordinated_page_route/blob/755b21299df0b162886018a35ad12078ea163678/lib/src/routes/sliding_push_routes/downward_push_route.dart).
 
+* [<h3>**`SlidingFadePushRoute`**</h3>](https://github.com/arrowsmith001/coordinated_page_route/blob/755b21299df0b162886018a35ad12078ea163678/lib/src/routes/abstract/sliding_push_route.dart)
 
-* [**`CoordinatedZoomFadeRoute`**](https://github.com/arrowsmith001/coordinated_page_route/blob/755b21299df0b162886018a35ad12078ea163678/lib/src/routes/coordinated_zoom_fade_route/coordinated_zoom_fade_route.dart): An example of a more visually interesting fully custom transition that is now possible. The outgoing route expands and fades out while the incoming route expands from a small size and fades in. Because this transition is see-through this should be implemented using transparent pages with the Navigator on an opaque background. 
+  An abstract class that is almost identical to `SlidingPushRoute` but includes a fade-in on the incoming route and a fade-out on the outgoing route. 
+
+  Also like `SlidingPushRoute`, it comes with 4 implementations for 4 directions: [`ForwardFadePushRoute`](https://github.com/arrowsmith001/coordinated_page_route/blob/61092446f3199a8b11f2d977b904fa8d66b2258a/lib/src/routes/sliding_fade_push_routes/forward_fade_push_route.dart), [`BackwardFadePushRoute`](https://github.com/arrowsmith001/coordinated_page_route/blob/61092446f3199a8b11f2d977b904fa8d66b2258a/lib/src/routes/sliding_fade_push_routes/backward_fade_push_route.dart), [`UpwardFadePushRoute`](https://github.com/arrowsmith001/coordinated_page_route/blob/61092446f3199a8b11f2d977b904fa8d66b2258a/lib/src/routes/sliding_fade_push_routes/upward_fade_push_route.dart) and [`DownwardFadePushRoute`](https://github.com/arrowsmith001/coordinated_page_route/blob/61092446f3199a8b11f2d977b904fa8d66b2258a/lib/src/routes/sliding_fade_push_routes/downward_fade_push_route.dart).
+
+* [<h3>**`CoordinatedZoomFadeRoute`**</h3>](https://github.com/arrowsmith001/coordinated_page_route/blob/61092446f3199a8b11f2d977b904fa8d66b2258a/lib/src/routes/multi/coordinated_zoom_fade_route.dart)
+
+  An example of a more visually interesting fully custom transition that is now possible. The outgoing route expands and fades out while the incoming route expands from a small size and fades in. Because this transition is see-through this should be implemented using transparent pages with the Navigator on an opaque background. 
 
 
 ## Getting started
